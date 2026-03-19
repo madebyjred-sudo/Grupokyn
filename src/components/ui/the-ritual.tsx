@@ -1,82 +1,75 @@
 import { motion } from "framer-motion";
-import { useTheme } from "@/lib/theme-context";
-import { cn } from "@/lib/utils";
 
 export function TheRitual() {
-    const { theme } = useTheme();
-    const isLunar = theme === 'lunar';
+    const steps = [
+        {
+            number: "01",
+            title: "Pausa",
+            description: "Encuentra un momento de tranquilidad en tu día. Observa tu respiración y permítete estar presente."
+        },
+        {
+            number: "02",
+            title: "Dosifica",
+            description: "Aplica de 3 a 5 gotas debajo de tu lengua. Ajusta según tus necesidades y la recomendación de tu especialista."
+        },
+        {
+            number: "03",
+            title: "Espera",
+            description: "Mantén el aceite durante 60 segundos antes de tragar para maximizar la absorción sublingual."
+        },
+        {
+            number: "04",
+            title: "Fluye",
+            description: "Siente cómo la sabiduría de la naturaleza te acompaña, aportando claridad mental y bienestar corporal."
+        }
+    ];
 
     return (
-        <section className={cn(
-            "py-24 px-6 relative transition-colors duration-1000",
-            isLunar ? "bg-[#0C0C0C]" : "bg-[#FFFBF0]"
-        )}>
+        <section className="py-32 px-6 bg-[#F3F0E6] text-[#1C5556] relative">
+            <div className="max-w-7xl mx-auto">
+                <motion.div
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, margin: "-100px" }}
+                    transition={{ duration: 1 }}
+                    className="mb-24 text-center md:text-left"
+                >
+                    <h2 className="text-sm md:text-base font-medium tracking-[0.4em] uppercase mb-6 text-[#2A7373]">
+                        El Ritual
+                    </h2>
+                    <h3 className="text-4xl md:text-6xl font-light tracking-tight text-[#1C5556]">
+                        Un hábito diario para <br /> tu bienestar.
+                    </h3>
+                </motion.div>
 
-            <div className={cn(
-                "max-w-7xl mx-auto w-full border-t pt-24 transition-colors duration-1000",
-                isLunar ? "border-white/10" : "border-black/10"
-            )}>
+                <div className="grid grid-cols-1 md:grid-cols-4 gap-8 md:gap-4 relative">
+                    {/* Connecting line for desktop */}
+                    <div className="hidden md:block absolute top-12 left-0 right-0 h-[1px] bg-[#1C5556]/10 z-0" />
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
-
-                    <motion.div
-                        initial={{ opacity: 0, y: 30 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true, margin: "-100px" }}
-                        transition={{ duration: 1 }}
-                    >
-                        <h2 className={cn(
-                            "text-sm md:text-base font-medium tracking-[0.4em] uppercase mb-8 transition-colors duration-1000",
-                            isLunar ? "text-white/50" : "text-[#1A1A1A]/50"
-                        )}>
-                            El Ritual
-                        </h2>
-                        <h3 className={cn(
-                            "text-3xl md:text-5xl font-light tracking-tight mb-6 transition-colors duration-1000",
-                            isLunar ? "text-white" : "text-[#1A1A1A]"
-                        )}>
-                            {isLunar ? "Tu ceremonia \n de desconexión." : "Tu catalizador \n de movimiento."}
-                        </h3>
-                        <p className={cn(
-                            "font-light text-lg leading-relaxed mb-8 max-w-md transition-colors duration-1000",
-                            isLunar ? "text-white/60" : "text-[#1A1A1A]/70"
-                        )}>
-                            {isLunar
-                                ? "Aplica 3 a 5 gotas debajo de la lengua 30 minutos antes de dormir. Mantén el elixir por 60 segundos antes de tragar. Cierra los ojos y deja que la restauración nocturna comience."
-                                : "Aplica 3 a 5 gotas debajo de la lengua al despertar. Mantén por 60 segundos antes de tragar. Siente el impulso de energía natural para comenzar tu día con foco y vitalidad."
-                            }
-                        </p>
-                    </motion.div>
-
-                    {/* Abstract Moon / Sun representation */}
-                    <motion.div
-                        initial={{ opacity: 0 }}
-                        whileInView={{ opacity: 1 }}
-                        viewport={{ once: true, margin: "-100px" }}
-                        transition={{ duration: 1.5 }}
-                        className="flex justify-center md:justify-end"
-                    >
-                        <div className={cn(
-                            "w-64 h-64 md:w-80 md:h-80 rounded-full border flex items-center justify-center relative transition-colors duration-1000",
-                            isLunar ? "border-[#8E24AA]/30" : "border-[#FF6B00]/30"
-                        )}>
-                            <div
-                                className={cn(
-                                    "absolute w-full h-full rounded-full border animate-ping transition-colors duration-1000",
-                                    isLunar ? "border-[#00E5FF]/20" : "border-[#FFC107]/40"
-                                )}
-                                style={{ animationDuration: '4s' }}
-                            />
-                            <div className={cn(
-                                "w-48 h-48 md:w-64 md:h-64 rounded-full bg-gradient-to-br blur-xl transition-colors duration-1000",
-                                isLunar ? "from-[#8E24AA]/20 to-transparent" : "from-[#FF6B00]/30 to-transparent"
-                            )} />
-                        </div>
-                    </motion.div>
+                    {steps.map((step, index) => (
+                        <motion.div
+                            key={step.number}
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true, margin: "-50px" }}
+                            transition={{ duration: 0.8, delay: index * 0.2 }}
+                            className="relative z-10 flex flex-col items-center md:items-start text-center md:text-left"
+                        >
+                            <div className="w-24 h-24 rounded-full border border-[#1C5556]/20 bg-[#F3F0E6] flex items-center justify-center mb-8 shrink-0">
+                                <span className="text-2xl font-light text-[#1C5556]">
+                                    {step.number}
+                                </span>
+                            </div>
+                            <h4 className="text-xl font-medium tracking-wide uppercase mb-4 text-[#1C5556]">
+                                {step.title}
+                            </h4>
+                            <p className="font-light text-[#1C5556]/70 leading-relaxed max-w-xs">
+                                {step.description}
+                            </p>
+                        </motion.div>
+                    ))}
                 </div>
-
             </div>
-
         </section>
     );
 }

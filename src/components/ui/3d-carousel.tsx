@@ -1,7 +1,6 @@
 "use client"
 
 import { memo, useEffect, useLayoutEffect, useMemo, useState } from "react"
-import { cn } from "@/lib/utils"
 import {
     AnimatePresence,
     motion,
@@ -9,7 +8,6 @@ import {
     useMotionValue,
     useTransform,
 } from "framer-motion"
-import { useTheme } from "@/lib/theme-context"
 
 export const useIsomorphicLayoutEffect =
     typeof window !== "undefined" ? useLayoutEffect : useEffect
@@ -189,8 +187,6 @@ const Carousel = memo(
 )
 
 function ThreeDPhotoCarousel() {
-    const { theme } = useTheme();
-    const isLunar = theme === 'lunar';
     const [activeImg, setActiveImg] = useState<string | null>(null)
     const [isCarouselActive, setIsCarouselActive] = useState(true)
     const controls = useAnimation()
@@ -213,7 +209,7 @@ function ThreeDPhotoCarousel() {
     }
 
     return (
-        <motion.div layout className="relative w-full overflow-visible">
+        <motion.div layout className="relative w-full overflow-visible bg-[#F3F0E6]">
             <AnimatePresence mode="sync">
                 {activeImg && (
                     <motion.div
@@ -247,14 +243,8 @@ function ThreeDPhotoCarousel() {
             </AnimatePresence>
             <div className="relative h-[400px] md:h-[600px] w-full overflow-hidden">
                 {/* Subtle horizontal gradient masks to fade the edges on large screens */}
-                <div className={cn(
-                    "absolute inset-y-0 left-0 w-32 z-10 pointer-events-none bg-gradient-to-r from-transparent to-transparent",
-                    isLunar ? "from-[#0C0C0C]" : "from-[#FFFBF0]"
-                )} />
-                <div className={cn(
-                    "absolute inset-y-0 right-0 w-32 z-10 pointer-events-none bg-gradient-to-l from-transparent to-transparent",
-                    isLunar ? "from-[#0C0C0C]" : "from-[#FFFBF0]"
-                )} />
+                <div className="absolute inset-y-0 left-0 w-32 z-10 pointer-events-none bg-gradient-to-r from-[#F3F0E6] to-transparent" />
+                <div className="absolute inset-y-0 right-0 w-32 z-10 pointer-events-none bg-gradient-to-l from-[#F3F0E6] to-transparent" />
 
                 <Carousel
                     handleClick={handleClick}

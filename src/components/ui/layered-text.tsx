@@ -2,7 +2,6 @@
 
 import { useEffect, useRef } from "react"
 import { gsap } from "gsap"
-import { useTheme } from "@/lib/theme-context"
 import { cn } from "@/lib/utils"
 import type React from "react"
 
@@ -14,24 +13,14 @@ interface LayeredTextProps {
     className?: string
 }
 
-const lunarLines = [
-    { top: "\u00A0", bottom: "Restauración" },
-    { top: "Restauración", bottom: "Nocturna" },
-    { top: "Nocturna", bottom: "Calma" },
-    { top: "Calma", bottom: "Profunda" },
-    { top: "Profunda", bottom: "Descanso" },
-    { top: "Descanso", bottom: "Renacer" },
-    { top: "Renacer", bottom: "\u00A0" },
-]
-
-const solarLines = [
-    { top: "\u00A0", bottom: "Energía" },
-    { top: "Energía", bottom: "Natural" },
-    { top: "Natural", bottom: "Vitalidad" },
-    { top: "Vitalidad", bottom: "Impulso" },
-    { top: "Impulso", bottom: "Enfoque" },
-    { top: "Enfoque", bottom: "Movimiento" },
-    { top: "Movimiento", bottom: "\u00A0" },
+const wordsLines = [
+    { top: "\u00A0", bottom: "Sabiduría" },
+    { top: "Sabiduría", bottom: "Naturaleza" },
+    { top: "Naturaleza", bottom: "Equilibrio" },
+    { top: "Equilibrio", bottom: "Bienestar" },
+    { top: "Bienestar", bottom: "Ancestral" },
+    { top: "Ancestral", bottom: "Pureza" },
+    { top: "Pureza", bottom: "\u00A0" },
 ]
 
 export function LayeredText({
@@ -43,10 +32,8 @@ export function LayeredText({
 }: LayeredTextProps) {
     const containerRef = useRef<HTMLDivElement>(null)
     const timelineRef = useRef<gsap.core.Timeline | null>(null)
-    const { theme } = useTheme()
-    const isLunar = theme === "lunar"
 
-    const lines = isLunar ? lunarLines : solarLines
+    const lines = wordsLines
 
     const calculateTranslateX = (index: number) => {
         const baseOffset = 35
@@ -94,15 +81,15 @@ export function LayeredText({
     return (
         <section
             className={cn(
-                "w-full py-24 md:py-32 transition-colors duration-1000 overflow-hidden",
-                isLunar ? "bg-[#0C0C0C]" : "bg-[#FFFBF0]"
+                "w-full py-24 md:py-32 overflow-hidden",
+                "bg-[#1C5556]"
             )}
         >
             <div
                 ref={containerRef}
                 className={cn(
-                    "mx-auto py-12 tracking-[-2px] antialiased cursor-pointer transition-colors duration-1000",
-                    isLunar ? "text-white" : "text-[#1A1A1A]",
+                    "mx-auto py-12 tracking-[-2px] antialiased cursor-pointer",
+                    "text-[#F3F0E6]",
                     className
                 )}
                 style={
@@ -118,7 +105,7 @@ export function LayeredText({
                         const translateX = calculateTranslateX(index)
                         return (
                             <li
-                                key={`${theme}-${index}`}
+                                key={`abuela-${index}`}
                                 className="overflow-hidden relative"
                                 style={
                                     {
@@ -139,7 +126,7 @@ export function LayeredText({
                                     {line.top}
                                 </p>
                                 <p
-                                    className="px-[15px] align-top whitespace-nowrap m-0 font-medium"
+                                    className="px-[15px] align-top whitespace-nowrap m-0 font-medium text-[#2A7373]"
                                     style={{
                                         height: `${lineHeight}px`,
                                         lineHeight: `${lineHeight - 5}px`,
