@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 export function HeroEclipseCard() {
     return (
         <motion.section
-            className="relative min-h-screen w-full flex flex-col justify-end items-center px-4 md:px-6 pt-12 overflow-hidden bg-[#1C5556]"
+            className="relative min-h-screen w-full flex flex-col justify-center md:justify-end items-center px-4 md:px-6 pt-8 md:pt-12 overflow-hidden bg-[#1C5556]"
         >
             {/* Background Video */}
             <video
@@ -51,7 +51,7 @@ export function HeroEclipseCard() {
                     transition={{ delay: 0.5, duration: 1, ease: "easeOut" }}
                     src="/kyn-logo.svg"
                     alt="KYN Logo"
-                    className="absolute top-0 md:top-2 left-1/2 ml-0 md:ml-1.5 w-16 md:w-20 h-auto z-50 drop-shadow-xl pointer-events-none"
+                    className="absolute -top-4 md:top-2 left-1/2 ml-0 md:ml-1.5 w-16 md:w-20 h-auto z-50 drop-shadow-xl pointer-events-none"
                 />
 
                 {/* The Masked Container (House Shape) - Restored size */}
@@ -59,7 +59,7 @@ export function HeroEclipseCard() {
                     initial={{ opacity: 0, scale: 0.95 }}
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ duration: 1.5, ease: "easeOut" }}
-                    className="relative w-full max-w-4xl lg:max-w-6xl aspect-[1.13/1] max-h-[85vh] flex flex-col items-center justify-end pb-8 md:pb-12 mt-12 md:mt-16"
+                    className="relative w-full max-w-4xl lg:max-w-6xl aspect-[1.13/1] max-h-[85vh] flex flex-col items-center justify-end pb-8 md:pb-12 mt-8 md:mt-16"
                 >
                     {/* The Background Image inside the Mask */}
                     <div
