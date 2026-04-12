@@ -15,13 +15,13 @@ export function TheEssence() {
                     transition={{ duration: 1 }}
                 >
                     <h2 className="text-sm md:text-base font-medium tracking-[0.4em] uppercase mb-12 text-[#2A7373]">
-                        La Esencia
+                        Esencia
                     </h2>
 
                     <p className="text-3xl md:text-5xl lg:text-6xl font-light leading-snug tracking-tight text-[#1C5556]">
-                        Diseñado para quienes valoran la sabiduría de la naturaleza y el bienestar duradero.
-                        <span className="block mt-4 text-[#1C5556]/60 text-2xl md:text-4xl">
-                            Una experiencia botánica ancestral elevada a su máxima pureza.
+                        Extracción de alta calidad soluble en agua.
+                        <span className="block mt-4 text-[#1C5556]/60 text-2xl md:text-3xl">
+                            funciona con un efecto de absorción 10 veces más rápido en el organismo.
                         </span>
                     </p>
                 </motion.div>

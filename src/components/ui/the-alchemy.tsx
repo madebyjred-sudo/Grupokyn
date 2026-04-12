@@ -15,7 +15,7 @@ export function TheAlchemy() {
                         La Alquimia
                     </h2>
                     <p className="text-3xl md:text-4xl font-light tracking-tight max-w-2xl mx-auto text-[#1C5556]">
-                        Dos elementos maestros de la naturaleza trabajando en perfecta sinergia.
+                        Fórmula maestra de la naturaleza para activar tu memoria y mejorar tu enfoque.
                     </p>
                 </motion.div>
 
@@ -37,10 +37,10 @@ export function TheAlchemy() {
                         </div>
                         <div>
                             <h3 className="text-2xl font-light tracking-wider uppercase mb-4 text-[#1C5556]">
-                                Cannabis F.S.
+                                Cannabis Soluble en agua
                             </h3>
                             <p className="font-light leading-relaxed text-[#1C5556]/70">
-                                El espectro completo garantiza el efecto séquito, conservando todos los cannabinoides, terpenos y flavonoides. Esta riqueza botánica apoya el alivio físico, el descanso reparador y el equilibrio interno para un bienestar integral.
+                                Planta de espectro completo que conserva todos los cannabinoides, terpenos y flavonoides. Esta riqueza botánica genera alivio físico y mejora el equilibrio interno para un bienestar integral en los 12 sistemas de tu cuerpo.
                             </p>
                         </div>
                     </motion.div>
@@ -65,7 +65,7 @@ export function TheAlchemy() {
                                 Melena de León
                             </h3>
                             <p className="font-light leading-relaxed text-[#1C5556]/70">
-                                Reconocido por sus propiedades neuroprotectoras, este hongo ancestral estimula la producción del factor de crecimiento nervioso (NGF), ayudando a mantener la memoria, la concentración y la vitalidad mental a lo largo de los años.
+                                Este hongo ancestral tiene propiedades neuroprotectoras que estimulan la conexión de neuronas, ayudando a mantener la memoria, la concentración y la vitalidad mental a lo largo de los años.
                             </p>
                         </div>
                     </motion.div>

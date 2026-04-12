@@ -1,13 +1,14 @@
-import { motion } from "framer-motion";
+import { motion, useMotionValue, useAnimationFrame } from "framer-motion";
 import { Star } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { useState, useRef, useLayoutEffect, useCallback, useEffect } from "react";
 
 const reviewsRow1 = [
     {
-        name: "María Gómez",
+        name: "Daniela R.",
         role: "Cliente Verificado",
-        text: "Desde que uso estas gotas he podido dormir de corrido toda la noche. Un cambio total para mi energía diaria.",
-        initial: "M",
+        text: "En menos de dos semanas noté un cambio real en mi enfoque. Trabajo mejor, me distraigo menos y mi mente está mucho más clara durante el día.",
+        initial: "D",
         bg: "bg-[#2A7373]",
     },
     {
@@ -65,7 +66,7 @@ const reviewsRow2 = [
     {
         name: "David F.",
         role: "Cliente Verificado",
-        text: "Excelente presentación y empaque. Realmente se nota la calidad Full Spectrum en los resultados.",
+        text: "Excelente presentación y empaque. Realmente se nota la calidad en los resultados desde la primera semana.",
         initial: "D",
         bg: "bg-[#2A7373]",
     },
@@ -86,9 +87,32 @@ interface ReviewType {
     bg: string;
 }
 
-const ReviewCard = ({ review }: { review: ReviewType }) => (
-    <div className="group relative flex-shrink-0 w-[300px] md:w-[400px] p-6 md:p-8 rounded-3xl bg-[#EFEBE0] border border-[#1C5556]/10 overflow-hidden flex flex-col justify-between transition-colors duration-500 hover:border-[#2A7373]/30">
-        <div className="absolute inset-0 bg-gradient-to-br from-[#2A7373]/0 to-[#2A7373]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+interface ReviewCardProps {
+    review: ReviewType;
+    isSelected: boolean;
+    hasSelection: boolean;
+    onSelect: () => void;
+}
+
+const ReviewCard = ({ review, isSelected, hasSelection, onSelect }: ReviewCardProps) => (
+    <div
+        onClick={onSelect}
+        onTouchEnd={(e) => { e.preventDefault(); onSelect(); }}
+        className={cn(
+            "relative flex-shrink-0 w-[300px] md:w-[400px] p-6 md:p-8 rounded-3xl bg-[#EFEBE0] overflow-hidden flex flex-col justify-between cursor-pointer select-none",
+            "border transition-all duration-500 ease-out",
+            isSelected
+                ? "border-[#2A7373]/70 shadow-2xl shadow-[#1C5556]/15"
+                : hasSelection
+                    ? "border-[#1C5556]/5 opacity-40"
+                    : "border-[#1C5556]/10"
+        )}
+    >
+        {/* Focus glow */}
+        <div className={cn(
+            "absolute inset-0 bg-gradient-to-br from-[#2A7373]/0 to-[#2A7373]/10 transition-opacity duration-500 pointer-events-none",
+            isSelected ? "opacity-100" : "opacity-0"
+        )} />
 
         <div className="relative z-10">
             <div className="flex gap-1 mb-4">
@@ -96,10 +120,18 @@ const ReviewCard = ({ review }: { review: ReviewType }) => (
                     <Star key={i} className="w-4 h-4 fill-[#F9A826] text-[#F9A826]" />
                 ))}
             </div>
-            <p className="text-[#1C5556] leading-relaxed mb-6 italic">"{review.text}"</p>
+            <p className={cn(
+                "leading-relaxed mb-6 italic transition-colors duration-300",
+                isSelected ? "text-[#1C5556]" : "text-[#1C5556]/80"
+            )}>"{review.text}"</p>
         </div>
+
         <div className="relative z-10 flex items-center gap-4">
-            <div className={cn("w-10 h-10 rounded-full flex items-center justify-center text-white font-medium", review.bg)}>
+            <div className={cn(
+                "w-10 h-10 rounded-full flex items-center justify-center text-white font-medium transition-transform duration-300",
+                review.bg,
+                isSelected && "ring-2 ring-[#2A7373]/40 ring-offset-2 ring-offset-[#EFEBE0]"
+            )}>
                 {review.initial}
             </div>
             <div>
@@ -110,7 +142,134 @@ const ReviewCard = ({ review }: { review: ReviewType }) => (
     </div>
 );
 
+interface ScrollRowProps {
+    items: ReviewType[];
+    direction: "left" | "right";
+    speed: number;
+    rowId: string;
+    selectedKey: string | null;
+    onSelect: (key: string | null) => void;
+}
+
+function ScrollRow({ items, direction, speed, rowId, selectedKey, onSelect }: ScrollRowProps) {
+    const x = useMotionValue(0);
+    const innerRef = useRef<HTMLDivElement>(null);
+    const totalWidthRef = useRef(0);
+    const isPausedRef = useRef(false);
+    const resumeTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+    useLayoutEffect(() => {
+        if (!innerRef.current) return;
+        totalWidthRef.current = innerRef.current.scrollWidth / 2;
+        if (direction === "right") {
+            x.set(-totalWidthRef.current);
+        }
+    }, []);
+
+    useAnimationFrame((_, delta) => {
+        if (isPausedRef.current || totalWidthRef.current === 0) return;
+        const total = totalWidthRef.current;
+        const moveBy = (delta / 1000) * (total / speed);
+
+        if (direction === "left") {
+            let next = x.get() - moveBy;
+            if (next <= -total) next += total;
+            x.set(next);
+        } else {
+            let next = x.get() + moveBy;
+            if (next >= 0) next -= total;
+            x.set(next);
+        }
+    });
+
+    const clearResumeTimer = useCallback(() => {
+        if (resumeTimerRef.current) {
+            clearTimeout(resumeTimerRef.current);
+            resumeTimerRef.current = null;
+        }
+    }, []);
+
+    const pause = useCallback(() => {
+        clearResumeTimer();
+        isPausedRef.current = true;
+    }, [clearResumeTimer]);
+
+    const resume = useCallback(() => {
+        isPausedRef.current = false;
+        onSelect(null);
+    }, [onSelect]);
+
+    const scheduleResume = useCallback((ms: number) => {
+        clearResumeTimer();
+        resumeTimerRef.current = setTimeout(resume, ms);
+    }, [resume, clearResumeTimer]);
+
+    // Desktop: hover pause/resume
+    const handleMouseEnter = useCallback(() => {
+        clearResumeTimer();
+        pause();
+    }, [pause, clearResumeTimer]);
+
+    const handleMouseLeave = useCallback(() => {
+        resume();
+    }, [resume]);
+
+    // Mobile: touch pause, auto-resume after delay
+    const handleTouchStart = useCallback(() => {
+        clearResumeTimer();
+        pause();
+    }, [pause, clearResumeTimer]);
+
+    const handleTouchEnd = useCallback(() => {
+        scheduleResume(3500);
+    }, [scheduleResume]);
+
+    const handleCardSelect = useCallback((key: string) => {
+        pause();
+        const next = selectedKey === key ? null : key;
+        onSelect(next);
+        if (next !== null) {
+            scheduleResume(4000);
+        }
+    }, [pause, onSelect, selectedKey, scheduleResume]);
+
+    useEffect(() => () => clearResumeTimer(), [clearResumeTimer]);
+
+    const rowHasSelection = selectedKey !== null && selectedKey.startsWith(`${rowId}-`);
+
+    return (
+        <div
+            className="overflow-hidden"
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
+            onTouchStart={handleTouchStart}
+            onTouchEnd={handleTouchEnd}
+        >
+            <motion.div
+                ref={innerRef}
+                style={{ x }}
+                className="flex gap-6 md:gap-8 px-3 md:px-4 will-change-transform"
+            >
+                {[...items, ...items].map((review, i) => {
+                    const selKey = `${rowId}-${i % items.length}`;
+                    return (
+                        <ReviewCard
+                            key={`${rowId}-item-${i}`}
+                            review={review}
+                            isSelected={selectedKey === selKey}
+                            hasSelection={rowHasSelection}
+                            onSelect={() => handleCardSelect(selKey)}
+                        />
+                    );
+                })}
+            </motion.div>
+        </div>
+    );
+}
+
 export function ReviewsSection() {
+    const [selectedKey, setSelectedKey] = useState<string | null>(null);
+
     return (
         <section className="py-24 w-full bg-[#F3F0E6] text-[#1C5556] overflow-hidden">
             <div className="max-w-7xl mx-auto px-6 mb-16 text-center">
@@ -123,44 +282,27 @@ export function ReviewsSection() {
                 </h2>
             </div>
 
-            <div className="relative flex flex-col gap-6 md:gap-8 max-w-[100vw]">
-                {/* Left/Right Fade Masks */}
-                <div className="absolute inset-y-0 left-0 w-16 md:w-40 bg-gradient-to-r from-[#F3F0E6] to-transparent z-10 pointer-events-none" />
-                <div className="absolute inset-y-0 right-0 w-16 md:w-40 bg-gradient-to-l from-[#F3F0E6] to-transparent z-10 pointer-events-none" />
+            <div className="relative flex flex-col gap-6 md:gap-8">
+                {/* Fade masks */}
+                <div className="absolute inset-y-0 left-0 w-16 md:w-40 bg-gradient-to-r from-[#F3F0E6] to-transparent z-20 pointer-events-none" />
+                <div className="absolute inset-y-0 right-0 w-16 md:w-40 bg-gradient-to-l from-[#F3F0E6] to-transparent z-20 pointer-events-none" />
 
-                {/* Row 1: Moves Left */}
-                <div className="flex w-max relative group">
-                    <motion.div
-                        animate={{ x: ["0%", "-50%"] }}
-                        transition={{
-                            repeat: Infinity,
-                            ease: "linear",
-                            duration: 40,
-                        }}
-                        className="flex gap-6 md:gap-8 px-3 md:px-4 group-hover:[animation-play-state:paused]"
-                    >
-                        {[...reviewsRow1, ...reviewsRow1, ...reviewsRow1].map((review, i) => (
-                            <ReviewCard key={`row1-${i}`} review={review} />
-                        ))}
-                    </motion.div>
-                </div>
-
-                {/* Row 2: Moves Right */}
-                <div className="flex w-max relative group">
-                    <motion.div
-                        animate={{ x: ["-50%", "0%"] }}
-                        transition={{
-                            repeat: Infinity,
-                            ease: "linear",
-                            duration: 45,
-                        }}
-                        className="flex gap-6 md:gap-8 px-3 md:px-4 group-hover:[animation-play-state:paused]"
-                    >
-                        {[...reviewsRow2, ...reviewsRow2, ...reviewsRow2].map((review, i) => (
-                            <ReviewCard key={`row2-${i}`} review={review} />
-                        ))}
-                    </motion.div>
-                </div>
+                <ScrollRow
+                    items={reviewsRow1}
+                    direction="left"
+                    speed={40}
+                    rowId="row1"
+                    selectedKey={selectedKey}
+                    onSelect={setSelectedKey}
+                />
+                <ScrollRow
+                    items={reviewsRow2}
+                    direction="right"
+                    speed={45}
+                    rowId="row2"
+                    selectedKey={selectedKey}
+                    onSelect={setSelectedKey}
+                />
             </div>
         </section>
     );

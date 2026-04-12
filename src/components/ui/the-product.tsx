@@ -1,48 +1,41 @@
 import { motion } from "framer-motion";
-import { Leaf, Moon, Brain, Activity, Droplets, Zap } from "lucide-react";
+import { Leaf, Brain, Activity, Droplets, Zap } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const productBenefits = [
     {
         title: "Alivio Profundo",
-        description: "Reduce la tensión corporal de forma prolongada.",
+        description: "Mejora y regula tu sistema nervioso.",
         icon: <Activity className="w-5 h-5 text-[#F3F0E6]/70" />,
         className: "top-[10%] -left-12 md:-left-40 w-48 md:w-64 text-right",
         position: "left"
     },
     {
         title: "Claridad Mental",
-        description: "Estimula la neurogénesis y disipa la niebla mental.",
+        description: "Estimula la creación de neuronas y mejora el enfoque.",
         icon: <Brain className="w-5 h-5 text-[#F3F0E6]/70" />,
         className: "top-[40%] -left-16 md:-left-48 w-48 md:w-64 text-right",
         position: "left"
     },
     {
         title: "Absorción Rápida",
-        description: "Vía sublingual para una biodisponibilidad superior.",
+        description: "Extracción soluble en agua 10 veces más efectiva que las tradicionales.",
         icon: <Zap className="w-5 h-5 text-[#F3F0E6]/70" />,
         className: "top-[70%] -left-12 md:-left-40 w-48 md:w-64 text-right",
         position: "left"
     },
     {
-        title: "Sueño Reparador",
-        description: "Induce un descanso profundo y sin interrupciones.",
-        icon: <Moon className="w-5 h-5 text-[#F3F0E6]/70" />,
-        className: "top-[10%] -right-12 md:-right-40 w-48 md:w-64 text-left",
-        position: "right"
-    },
-    {
         title: "Máxima Pureza",
-        description: "Extracción Full Spectrum que preserva cada terpeno.",
+        description: "Fórmula molecular única en el mundo que conserva más de 500 compuestos 100% naturales.",
         icon: <Droplets className="w-5 h-5 text-[#F3F0E6]/70" />,
-        className: "top-[40%] -right-16 md:-right-48 w-48 md:w-64 text-left",
+        className: "top-[25%] -right-16 md:-right-48 w-48 md:w-64 text-left",
         position: "right"
     },
     {
         title: "Equilibrio Natural",
-        description: "Devuelve la homeostasis sin efectos secundarios.",
+        description: "Bienestar integral sin efectos secundarios.",
         icon: <Leaf className="w-5 h-5 text-[#F3F0E6]/70" />,
-        className: "top-[70%] -right-12 md:-right-40 w-48 md:w-64 text-left",
+        className: "top-[60%] -right-12 md:-right-40 w-48 md:w-64 text-left",
         position: "right"
     },
 ];
@@ -67,7 +60,7 @@ export function TheProduct() {
                         Presentación
                     </h2>
                     <p className="text-3xl md:text-4xl font-light tracking-tight mt-4 text-[#F3F0E6]">
-                        El poder completo <span className="italic font-serif text-[#F3F0E6]/80">de la naturaleza</span>
+                        Combinación perfecta <span className="italic font-serif text-[#F3F0E6]/80">de la Naturaleza</span>
                     </p>
                 </motion.div>
 

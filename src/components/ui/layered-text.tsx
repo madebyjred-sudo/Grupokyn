@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useRef } from "react"
+import { useEffect, useRef, useState } from "react"
 import { gsap } from "gsap"
 import { cn } from "@/lib/utils"
 import type React from "react"
@@ -24,7 +24,7 @@ const wordsLines = [
 ]
 
 export function LayeredText({
-    fontSize = "72px",
+    fontSize = "clamp(28px, 6vw, 72px)",
     fontSizeMd = "36px",
     lineHeight = 60,
     lineHeightMd = 35,
@@ -32,12 +32,20 @@ export function LayeredText({
 }: LayeredTextProps) {
     const containerRef = useRef<HTMLDivElement>(null)
     const timelineRef = useRef<gsap.core.Timeline | null>(null)
+    const [isMobile, setIsMobile] = useState(false)
 
     const lines = wordsLines
 
+    useEffect(() => {
+        const checkMobile = () => setIsMobile(window.innerWidth < 768)
+        checkMobile()
+        window.addEventListener("resize", checkMobile)
+        return () => window.removeEventListener("resize", checkMobile)
+    }, [])
+
     const calculateTranslateX = (index: number) => {
         const baseOffset = 35
-        const baseOffsetMd = 20
+        const baseOffsetMd = 12
         const centerIndex = Math.floor(lines.length / 2)
         return {
             desktop: (index - centerIndex) * baseOffset,
@@ -109,18 +117,16 @@ export function LayeredText({
                                 className="overflow-hidden relative"
                                 style={
                                     {
-                                        height: `${lineHeight}px`,
-                                        transform: `translateX(${translateX.desktop}px) skew(${index % 2 === 0 ? "60deg, -30deg" : "0deg, -30deg"}) scaleY(${index % 2 === 0 ? "0.66667" : "1.33333"})`,
-                                        "--md-height": `${lineHeightMd}px`,
-                                        "--md-translateX": `${translateX.mobile}px`,
+                                        height: `${isMobile ? lineHeightMd : lineHeight}px`,
+                                        transform: `translateX(${isMobile ? translateX.mobile : translateX.desktop}px) skew(${index % 2 === 0 ? "60deg, -30deg" : "0deg, -30deg"}) scaleY(${index % 2 === 0 ? "0.66667" : "1.33333"})`,
                                     } as React.CSSProperties
                                 }
                             >
                                 <p
                                     className="px-[15px] align-top whitespace-nowrap m-0 font-extralight"
                                     style={{
-                                        height: `${lineHeight}px`,
-                                        lineHeight: `${lineHeight - 5}px`,
+                                        height: `${isMobile ? lineHeightMd : lineHeight}px`,
+                                        lineHeight: `${(isMobile ? lineHeightMd : lineHeight) - 5}px`,
                                     }}
                                 >
                                     {line.top}
@@ -128,8 +134,8 @@ export function LayeredText({
                                 <p
                                     className="px-[15px] align-top whitespace-nowrap m-0 font-medium text-[#2A7373]"
                                     style={{
-                                        height: `${lineHeight}px`,
-                                        lineHeight: `${lineHeight - 5}px`,
+                                        height: `${isMobile ? lineHeightMd : lineHeight}px`,
+                                        lineHeight: `${(isMobile ? lineHeightMd : lineHeight) - 5}px`,
                                     }}
                                 >
                                     {line.bottom}

@@ -25,11 +25,9 @@ export function BrandFooter() {
                     transition={{ duration: 0.8, delay: 0.4 }}
                     className="text-xs tracking-widest uppercase flex flex-col md:flex-row justify-center items-center gap-4 text-[#F3F0E6]/50"
                 >
-                    <span>Cannabis F.S.</span>
+                    <span>Cannabis y Melena de León Soluble en Agua</span>
                     <span className="hidden md:inline">&middot;</span>
-                    <span>Melena de León</span>
-                    <span className="hidden md:inline">&middot;</span>
-                    <span>10 ML</span>
+                    <span>20 ML</span>
                 </motion.div>
                 <motion.p
                     initial={{ opacity: 0 }}

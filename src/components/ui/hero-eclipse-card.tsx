@@ -84,9 +84,9 @@ export function HeroEclipseCard() {
                     {/* Labels positioned INSIDE the mask at the bottom */}
                     <div className="w-full px-8 md:px-16 grid grid-cols-2 md:grid-cols-4 gap-4 z-20">
                         {[
-                            { title: "Volumen", value: "10 ML" },
-                            { title: "Pureza", value: "CBD ≤ 0,3%" },
-                            { title: "Extracción", value: "Full Spectrum" },
+                            { title: "Volumen", value: "20 ML" },
+                            { title: "Pureza", value: "Soluble en agua" },
+                            { title: "Extracción", value: "Soluble en agua" },
                             { title: "Sinergia", value: "Melena de León" }
                         ].map((item, index) => (
                             <motion.div

@@ -10,12 +10,12 @@ export function TheRitual() {
         {
             number: "02",
             title: "Dosifica",
-            description: "Aplica de 3 a 5 gotas debajo de tu lengua. Ajusta según tus necesidades y la recomendación de tu especialista."
+            description: "Aplica de 3 a 5 gotas debajo de tu lengua, O viértelas en un vaso con agua y ajusta según tus necesidades."
         },
         {
             number: "03",
-            title: "Espera",
-            description: "Mantén el aceite durante 60 segundos antes de tragar para maximizar la absorción sublingual."
+            title: "Intención",
+            description: "Dale un propósito y direcciona con tu mente el beneficio esperado."
         },
         {
             number: "04",
@@ -35,11 +35,8 @@ export function TheRitual() {
                     className="mb-24 text-center md:text-left"
                 >
                     <h2 className="text-sm md:text-base font-medium tracking-[0.4em] uppercase mb-6 text-[#2A7373]">
-                        El Ritual
+                        cómo tomar las gotas de La Abuela
                     </h2>
-                    <h3 className="text-4xl md:text-6xl font-light tracking-tight text-[#1C5556]">
-                        Un hábito diario para <br /> tu bienestar.
-                    </h3>
                 </motion.div>
 
                 <div className="grid grid-cols-1 md:grid-cols-4 gap-8 md:gap-4 relative">
