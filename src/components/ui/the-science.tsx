@@ -25,9 +25,9 @@ export function TheScience() {
 
                     <div className="flex gap-12 border-t pt-8 mt-8 border-[#F3F0E6]/10">
                         <div>
-                            <span className="block text-3xl font-light mb-2 text-[#F3F0E6]">Soluble</span>
+                            <span className="block text-3xl font-light mb-2 text-[#F3F0E6]">CBD</span>
                             <span className="text-xs tracking-widest uppercase text-[#F3F0E6]/50">
-                                en agua
+                                Espectro completo
                             </span>
                         </div>
                         <div>

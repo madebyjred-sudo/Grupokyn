@@ -85,9 +85,9 @@ export function HeroEclipseCard() {
                     <div className="w-full px-8 md:px-16 grid grid-cols-2 md:grid-cols-4 gap-4 z-20">
                         {[
                             { title: "Volumen", value: "20 ML" },
-                            { title: "Pureza", value: "Soluble en agua" },
+                            { title: "Pureza", value: "Espectro completo" },
                             { title: "Extracción", value: "Soluble en agua" },
-                            { title: "Sinergia", value: "Melena de León" }
+                            { title: "Sinergia", value: "Melena de León + CBD" }
                         ].map((item, index) => (
                             <motion.div
                                 key={index}
