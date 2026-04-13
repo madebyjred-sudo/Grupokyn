@@ -82,7 +82,7 @@ export function HeroEclipseCard() {
                     />
 
                     {/* Labels positioned INSIDE the mask at the bottom */}
-                    <div className="w-full px-8 md:px-16 grid grid-cols-2 md:grid-cols-4 gap-4 z-20">
+                    <div className="w-full px-3 md:px-16 grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-4 z-20">
                         {[
                             { title: "Volumen", value: "20 ML" },
                             { title: "Pureza", value: "Espectro completo" },
@@ -94,12 +94,12 @@ export function HeroEclipseCard() {
                                 initial={{ opacity: 0, y: 20 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ delay: 1 + (index * 0.15), duration: 0.8 }}
-                                className="flex flex-col items-center justify-center text-center bg-black/20 backdrop-blur-md rounded-xl p-3 border border-white/10 hover:bg-white/10 hover:border-white/30 transition-all duration-300 cursor-pointer"
+                                className="flex flex-col items-center justify-center text-center bg-black/20 backdrop-blur-md rounded-xl p-2 md:p-3 border border-white/10 hover:bg-white/10 hover:border-white/30 transition-all duration-300 cursor-pointer min-h-[44px]"
                             >
-                                <span className="text-[9px] md:text-xs tracking-[0.2em] uppercase text-white/70 mb-1">
+                                <span className="text-[8px] md:text-xs tracking-[0.12em] md:tracking-[0.2em] uppercase text-white/70 mb-0.5">
                                     {item.title}
                                 </span>
-                                <span className="text-xs md:text-sm font-medium tracking-wider uppercase text-white">
+                                <span className="text-[10px] md:text-sm font-medium tracking-normal md:tracking-wider uppercase text-white leading-tight">
                                     {item.value}
                                 </span>
                             </motion.div>

@@ -54,7 +54,7 @@ export function TheProduct() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, margin: "-100px" }}
                     transition={{ duration: 1 }}
-                    className="text-center mb-24 md:mb-32"
+                    className="text-center mb-8 md:mb-32"
                 >
                     <h2 className="text-sm md:text-base font-medium tracking-[0.4em] uppercase mb-4 text-[#F3F0E6]/50">
                         Presentación
@@ -65,7 +65,7 @@ export function TheProduct() {
                 </motion.div>
 
                 {/* Central Pedestal / Product Image */}
-                <div className="relative w-full max-w-[380px] md:max-w-[460px] aspect-[1/2] md:aspect-[2/3] mx-auto flex items-center justify-center mt-12 md:mt-24">
+                <div className="relative w-full max-w-[280px] md:max-w-[460px] aspect-[2/3] md:aspect-[2/3] mx-auto flex items-center justify-center mt-4 md:mt-24">
 
                     {/* Subtle Glow behind the product */}
                     <motion.div
