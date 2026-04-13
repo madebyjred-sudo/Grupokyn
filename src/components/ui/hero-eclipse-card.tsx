@@ -60,7 +60,7 @@ export function HeroEclipseCard() {
                     initial={{ opacity: 0, scale: 0.95 }}
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ duration: 1.5, ease: "easeOut" }}
-                    className="relative w-full max-w-4xl lg:max-w-6xl aspect-[1.13/1] max-h-[85vh] flex flex-col items-center justify-end pb-12 md:pb-12 mt-8 md:mt-16"
+                    className="relative w-full max-w-4xl lg:max-w-6xl aspect-[1.13/1] max-h-[85vh] flex flex-col items-center justify-end pb-8 md:pb-12 mt-8 md:mt-16"
                 >
                     {/* Background Image inside the Mask */}
                     <div
@@ -106,12 +106,12 @@ export function HeroEclipseCard() {
                         ))}
                     </div>
 
-                    {/* Artist credit — below cards, inside mask */}
+                    {/* Artist credit — absolute at bottom of house */}
                     <motion.p
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         transition={{ delay: 1.8, duration: 1 }}
-                        className="mt-2 text-[10px] md:text-xs font-light tracking-[0.4em] uppercase text-[#F3F0E6]/60 z-30"
+                        className="absolute bottom-1 md:bottom-4 text-[10px] md:text-xs font-light tracking-[0.4em] uppercase text-[#F3F0E6]/60 z-30"
                     >
                         Arte: Martha Abad
                     </motion.p>
