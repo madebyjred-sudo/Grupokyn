@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 export function HeroEclipseCard() {
     return (
         <motion.section
-            className="relative min-h-[75dvh] md:min-h-screen w-full flex flex-col justify-end items-center px-4 md:px-6 pt-12 pb-4 md:pb-8 overflow-hidden bg-[#1C5556]"
+            className="relative w-full flex flex-col justify-end items-center px-4 md:px-6 pt-6 pb-4 md:min-h-screen md:pt-12 md:pb-8 overflow-hidden bg-[#1C5556]"
         >
             {/* Background Video */}
             <video
@@ -60,7 +60,7 @@ export function HeroEclipseCard() {
                     initial={{ opacity: 0, scale: 0.95 }}
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ duration: 1.5, ease: "easeOut" }}
-                    className="relative w-full max-w-4xl lg:max-w-6xl aspect-[1.13/1] max-h-[85vh] flex flex-col items-center justify-end pb-8 md:pb-12 mt-8 md:mt-16"
+                    className="relative w-full max-w-4xl lg:max-w-6xl aspect-[1.13/1] max-h-[85vh] flex flex-col items-center justify-end pb-8 md:pb-12 mt-2 md:mt-16"
                 >
                     {/* Background Image inside the Mask */}
                     <div
